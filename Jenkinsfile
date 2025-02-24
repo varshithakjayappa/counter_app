@@ -1,31 +1,26 @@
-pipeline{
+pipeline {
     agent any
-      environment {
-        SONARQUBE_ENV = credentials('sonar-token') // SonarQube credentials ID 
+    environment {
+        SONARQUBE_ENV = credentials('sonar-token')
     }
-    stages{
-        stage("gitcheckout"){
-            steps{
-               script{
-                 git branch: 'main', url: 'https://github.com/varshithakjayappa/counter_app.git'
+    stages {
+        stage("gitcheckout") {
+            steps {
+                script {
+                    git branch: 'main', url: 'https://github.com/varshithakjayappa/counter_app.git'
                 }
             }
         }
-
-        stage("sonarquality status"){
-            agent {
-                docker {
-                    image 'maven:latest'
-                }
-            } 
-            steps{
+        stage("sonarquality status") {
+            steps {
                 script {
-                  withSonarQubeEnv('sonar-token') {
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=java_web_app'
-                 }
+                    docker.image('maven:latest').inside {
+                        withSonarQubeEnv('sonar-token') {
+                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=java_web_app'
+                        }
+                    }
                 }
             }
-            
         }
     }
 }
