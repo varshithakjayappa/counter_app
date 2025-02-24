@@ -8,7 +8,7 @@ pipeline{
             steps{
                script{
                  git branch: 'main', url: 'https://github.com/varshithakjayappa/counter_app.git'
-               }
+                }
             }
         }
 
