@@ -7,6 +7,7 @@ pipeline{
         stage("gitcheckout"){
             steps{
                script{
+                 deleteDir() // Cleans up workspace before fetching
                  git branch: 'main', url: 'https://github.com/varshithakjayappa/counter_app.git'
                }
             }
