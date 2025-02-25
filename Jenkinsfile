@@ -16,7 +16,7 @@ pipeline {
                 script {
                     docker.image('maven:latest').inside {
                         withSonarQubeEnv('sonar-token') {
-                            sh 'mvn clean verify sonar:sonar'
+                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=counter_app'
                         }
                     }
                 }
