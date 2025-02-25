@@ -16,9 +16,16 @@ pipeline {
                 script {
                     docker.image('maven:latest').inside {
                         withSonarQubeEnv('sonar-token') {
-                            sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=java_web_app'
+                            sh 'mvn clean verify sonar:sonar'
                         }
                     }
+                }
+            }
+        }
+        stage("quality gate check"){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
             }
         }
