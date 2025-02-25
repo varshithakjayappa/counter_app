@@ -46,7 +46,7 @@
               <goal>repackage</goal>
             </goals>
             <configuration>
-              <finalName>Uber</finalName>
+              <finalName>springboot-1.0.0</finalName>
             </configuration>
           </execution>
         </executions>
