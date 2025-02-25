@@ -56,7 +56,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_cred')]) {
                     sh '''
                     docker build -t 172.17.0.1:8085/springboot-app:${VERSION} .
-                    sudo docker login -u admin -p $nexus_cred 172.17.0.1:8085
+                    docker login -u admin -p $nexus_cred 172.17.0.1:8085
                     docker push 172.17.0.1:8085/springboot-app:${VERSION}
                     docker rmi 172.17.0.1:8085/springboot-app:${VERSION}  
                     ''' 
