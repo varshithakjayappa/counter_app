@@ -12,16 +12,18 @@ spec:
       labels:
         app: springboot-app
     spec:
+      imagePullSecrets:
+        - name: nexus-secret  # 🔹 Add this line
       containers:
       - name: springboot-app
         image: 172.17.0.1:8085/springboot-app:v1.1.0
-        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 8082
+
 ---
 
 apiVersion: v1

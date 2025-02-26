@@ -68,9 +68,15 @@ pipeline {
     }
     post{
         always{
-            mail bcc: '', body: '''Project: ${env.JOB_NAME} <br/>
-            Build Number: ${env.BUILD_NUMBER} <br/>
-            URL: ${env.BUILD_URL}''', cc: '', from: '', replyTo: '', subject: '${currentBuild.result}', to: 'varshithakadur@gmail.com'
+            mail bcc: '',
+                 body: """Project: ${env.JOB_NAME} <br/>
+                          Build Number: ${env.BUILD_NUMBER} <br/>
+                          URL: ${env.BUILD_URL}""",
+                 cc: '',
+                 from: '',
+                 replyTo: '',
+                 subject: "${currentBuild.result}",
+                 to: 'varshithakadur@gmail.com'
         }
     }
 }
